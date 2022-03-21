@@ -1,0 +1,1 @@
+package uz.coder.mvpexample.models.books.booksimport androidx.room.Entityimport java.io.Serializable@Entitydata class BuyLink(    val name: String,    val url: String) : Serializable

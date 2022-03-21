@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">MVP example</string>
+    <string name="buttonText">Click</string>
+    <string name="description">description</string>
+    <string name="subHeading">alovuddin kambarov</string>
+    <string name="heading">MVP example</string>
+
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="saved">Saved</string>
+    <string name="what_s_it_about">What\'s it about?</string>
+    <string name="this_is_descriptions">This is descriptions :)</string>
+    <string name="who_s_it_for">Who\'s it for?</string>
+    <string name="custom_description">This is a book about her lover. He fought very hard for his love. Do you want to know if she has reached her lover or not. Read the book …</string>
+    <string name="get_now">Get now</string>
+    <string name="home">Home</string>
+    <string name="share">Share</string>
+    <string name="no_saved_yet">No saved yet!</string>
+</resources>

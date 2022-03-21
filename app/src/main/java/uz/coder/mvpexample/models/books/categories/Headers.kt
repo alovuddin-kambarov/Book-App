@@ -1,0 +1,1 @@
+package uz.coder.mvpexample.models.books.categoriesdata class Headers(    val copyright: String,    val num_results: Int,    val status: String)

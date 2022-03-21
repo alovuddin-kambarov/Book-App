@@ -1,0 +1,1 @@
+package uz.coder.mvpexample.models.books.categoriesdata class Body(    val num_results: Int,    val results: List<Result>)

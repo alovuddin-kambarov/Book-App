@@ -1,0 +1,1 @@
+package uz.coder.mvpexample.models.books.categoriesdata class CategoryName(    val body: Body,    val headers: Headers)

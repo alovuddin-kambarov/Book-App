@@ -1,0 +1,1 @@
+package uz.coder.mvpexample.models.books.booksimport androidx.room.Entityimport java.io.Serializable@Entitydata class Isbn(    val isbn10: String,    val isbn13: String):Serializable
