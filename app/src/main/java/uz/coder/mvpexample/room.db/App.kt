@@ -8,10 +8,7 @@ class App : Application() {
         super.onCreate()
         AppDatabase.getInstants(this)
 
-        // disable night mode settings
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
-        // init blurLayout
-       // BlurKit.init(this)
     }
 }

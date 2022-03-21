@@ -3,6 +3,7 @@ package uz.coder.mvpexample.room.db
 import android.content.Context
 import androidx.room.*
 import uz.coder.mvpexample.models.books.books.BookX
+import uz.coder.mvpexample.room.db.convertors.DataConvertor
 
 @Database(entities = [BookX::class], version = 1)
 @TypeConverters(DataConvertor::class, DataConvertor::class)

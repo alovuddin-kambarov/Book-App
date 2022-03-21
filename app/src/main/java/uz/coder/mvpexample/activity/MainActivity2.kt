@@ -27,57 +27,21 @@ class MainActivity2 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMain2Binding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        val dataBase =  AppDatabase.getInstants(binding.root.context).dao()
-
+        
         book = intent.getSerializableExtra("book") as BookX
-
 
         window.statusBarColor = ContextCompat.getColor(this, R.color.yellow)
 
+        checkSaved()
+        save()
+        loadData()
 
-        dataBase.getAll().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe({
+        binding.imageView2.setOnClickListener { onBackPressed() }
 
-            it.forEach {
-
-                if (it.book_image == book.book_image){
-                    binding.save.speed = 3f
-                    binding.save.playAnimation()
-                    isChecked = true
-                }else{
-                    binding.save.speed = -2f
-                    binding.save.playAnimation()
-                    isChecked = false
-                }
-
-            }
-
-        }){
-
-        }
-
-
-        binding.save.setOnClickListener {
-
-            if (isChecked) {
-                binding.save.speed = -2f
-                binding.save.playAnimation()
-                isChecked = false
-               dataBase.delete(book.book_image).subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread()).subscribe()
-            } else {
-                binding.save.speed = 3f
-                binding.save.playAnimation()
-                isChecked = true
-                dataBase.add(book).subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread()).subscribe()
-            }
-
-
-        }
-
-
-        binding.description.text = book.description
+    }
+    
+    @SuppressLint("SetTextI18n")
+    fun loadData(){
 
         Picasso.get().load(book.book_image).resize(200, 200).into(binding.bookImage, object :
             Callback {
@@ -92,6 +56,8 @@ class MainActivity2 : AppCompatActivity() {
 
         binding.tv.text = book.title
         binding.textView.text = "by " + book.author
+        binding.description.text = book.description
+
 
         binding.btn1.setOnClickListener {
             try {
@@ -103,6 +69,58 @@ class MainActivity2 : AppCompatActivity() {
             }
         }
 
-        binding.imageView2.setOnClickListener { onBackPressed() }
+
     }
+
+    private fun save() {
+        val dataBase = AppDatabase.getInstants(binding.root.context).dao()
+        binding.save.setOnClickListener {
+
+            if (isChecked) {
+                binding.save.speed = -2f
+                binding.save.playAnimation()
+                isChecked = false
+                dataBase.delete(book.book_image).subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread()).subscribe()
+            } else {
+                binding.save.speed = 3f
+                binding.save.playAnimation()
+                isChecked = true
+                dataBase.add(book).subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread()).subscribe()
+            }
+
+
+        }
+    }
+
+    @SuppressLint("CheckResult")
+    fun checkSaved() {
+
+        val dataBase = AppDatabase.getInstants(binding.root.context).dao()
+        dataBase.getAll().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ it ->
+
+                it.forEach {
+
+                    if (it.book_image == book.book_image) {
+                        binding.save.speed = 3f
+                        binding.save.playAnimation()
+                        isChecked = true
+                    } else {
+                        binding.save.speed = -2f
+                        binding.save.playAnimation()
+                        isChecked = false
+                    }
+
+                }
+
+            }) {
+
+            }
+
+
+    }
+
+
 }

@@ -39,11 +39,11 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeBinding.inflate(layoutInflater)
+        viewModel = ViewModelProvider(this)[ViewModel::class.java]
 
 
         setProgress()
 
-        viewModel = ViewModelProvider(this)[ViewModel::class.java]
 
         binding.see.setOnClickListener {
 
@@ -61,7 +61,6 @@ class HomeFragment : Fragment() {
         getCategoryName()
 
         binding.rvWriters.adapter = WritersAdapter(MyData.getAllWriters())
-
 
 
         return binding.root

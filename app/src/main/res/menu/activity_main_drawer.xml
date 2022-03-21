@@ -12,10 +12,6 @@
             android:id="@+id/savedFragment"
             android:icon="@drawable/bookmark2"
             android:title="@string/saved" />
-        <item
-            android:id="@+id/categoryFragment"
-            android:icon="@drawable/ic_baseline_share_24"
-            android:title="@string/share" />
     </group>
 
 </menu>
