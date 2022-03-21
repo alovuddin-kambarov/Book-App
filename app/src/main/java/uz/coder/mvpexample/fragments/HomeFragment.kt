@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
@@ -42,6 +43,7 @@ class HomeFragment : Fragment() {
         viewModel = ViewModelProvider(this)[ViewModel::class.java]
 
 
+
         setProgress()
 
 
@@ -49,6 +51,7 @@ class HomeFragment : Fragment() {
 
             val bundle = Bundle()
             bundle.putString("key", "Travel")
+            bundle.putString("title", "All books")
             findNavController().navigate(
                 R.id.categoryFragment, bundle,
                 setAnimation().build()
@@ -93,6 +96,7 @@ class HomeFragment : Fragment() {
         viewModel.getData(binding.root.context, "hardcover-fiction").observe(viewLifecycleOwner) {
             when (it.status) {
                 Status.SUCCESS -> {
+                    binding.rvBook.visibility = View.VISIBLE
                     dialog.cancel()
                     arrayList = ArrayList()
                     arrayList.addAll(it.data!!.results.books)
@@ -103,7 +107,9 @@ class HomeFragment : Fragment() {
 
 
                 }
-                Status.LOADING -> {}
+                Status.LOADING -> {
+                    binding.rvBook.visibility = View.INVISIBLE
+                }
                 Status.ERROR -> {
 
                     dialog.cancel()
@@ -113,7 +119,7 @@ class HomeFragment : Fragment() {
                             "Ok"
                         ) { p0, _ ->
                             p0.cancel()
-                            activity?.finish()
+
                         }.show()
 
                 }
@@ -130,6 +136,7 @@ class HomeFragment : Fragment() {
             when (it.status) {
                 Status.SUCCESS -> {
 
+                    binding.rv.visibility = View.VISIBLE
                     dialog.cancel()
                     arrayList2 = ArrayList()
                     arrayList2.addAll(it.data!!.body.results)
@@ -137,6 +144,7 @@ class HomeFragment : Fragment() {
                         override fun click(result: Result) {
                             val bundle = Bundle()
                             bundle.putString("key", result.list_name_encoded)
+                            bundle.putString("title", result.list_name)
                             findNavController().navigate(
                                 R.id.categoryFragment, bundle,
                                 setAnimation().build()
@@ -157,12 +165,12 @@ class HomeFragment : Fragment() {
                             "Ok"
                         ) { p0, _ ->
                             p0.cancel()
-                            activity?.finish()
                         }.show()
 
 
                 }
                 Status.LOADING -> {
+                    binding.rv.visibility = View.INVISIBLE
                 }
             }
 

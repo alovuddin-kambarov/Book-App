@@ -20,6 +20,7 @@ import uz.coder.mvpexample.retrofit.view_model.ViewModel
 class CategoryFragment : Fragment() {
 
     lateinit var binding: FragmentCategoryBinding
+    var title = "All books"
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -30,6 +31,7 @@ class CategoryFragment : Fragment() {
         binding.progress.playAnimation()
 
         val key = arguments?.getString("key")
+        title = arguments?.getString("title").toString()
 
         val viewModel = ViewModelProvider(this)[ViewModel::class.java]
         viewModel.getData(binding.root.context, key!!).observe(viewLifecycleOwner) {
@@ -74,7 +76,7 @@ class CategoryFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         (activity as AppCompatActivity?)!!.supportActionBar!!.show()
-        (activity as AppCompatActivity?)!!.supportActionBar!!.title = "Categories"
+        (activity as AppCompatActivity?)!!.supportActionBar!!.title = title
         (activity as AppCompatActivity?)!!.supportActionBar?.setHomeButtonEnabled(true)
         (activity as AppCompatActivity?)!!.supportActionBar?.setDisplayHomeAsUpEnabled(true)
         (activity as AppCompatActivity?)!!.supportActionBar?.setHomeAsUpIndicator(R.drawable.more_icon2)
